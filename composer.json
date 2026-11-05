@@ -1,0 +1,16 @@
+{
+    "name": "dbravoan/dbcms-theme-db-brutalist",
+    "type": "dbcms-theme",
+    "description": "Estética neo-brutalista audaz con bordes gruesos negros, sombras duras desplazadas, colores pop saturados y tipografía tipográfica rotunda.",
+    "license": "MIT",
+    "require": {
+        "dbravoan/dbcms-core": "^1.0"
+    },
+    "extra": {
+        "dbcms": {
+            "identifier": "db-brutalist",
+            "repository": "https://github.com/dbravoan/dbcms-theme-db-brutalist",
+            "name": "dbCMS Brutalist (Neo-Brutalism Pop)"
+        }
+    }
+}
