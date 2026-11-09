@@ -2,8 +2,7 @@
 
 @php
     $currentLocale = app()->getLocale();
-    $catTrans = $category->translations->where('locale', $currentLocale)->first()
-        ?? $category->translations->first();
+    $catTrans = public_translation($category, $currentLocale, $currentMarket ?? null);
     $catFallbackName = match($currentLocale) {
         'ca' => 'Categoria',
         'en' => 'Category',
@@ -50,8 +49,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @forelse($posts as $post)
             @php
-                $trans = $post->translations->where('locale', app()->getLocale())->first()
-                    ?? $post->translations->first();
+                $trans = public_translation($post);
                 $localization = app(\DbCms\Core\Contracts\Services\LocalizationServiceInterface::class);
                 $postUrl = $localization->url('/blog/' . ($trans?->slug ?? ''), $currentMarket);
             @endphp

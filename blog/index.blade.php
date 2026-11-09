@@ -58,7 +58,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @forelse($posts as $post)
             @php
-                $trans = $post->translations->where('locale', app()->getLocale())->first() ?? $post->translations->first();
+                $trans = public_translation($post);
             @endphp
             @if($trans)
                 <article class="brutalist-card flex flex-col justify-between overflow-hidden group">

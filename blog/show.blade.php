@@ -1,8 +1,7 @@
 @extends('theme-db-brutalist::layouts.app')
 
 @php
-    $trans = $post->translations->where('locale', app()->getLocale())->first()
-        ?? $post->translations->first();
+    $trans = public_translation($post);
     $marketCode = $currentMarket?->code ?? 'es';
     $markdownRenderer = app(\DbCms\Core\Services\Media\MarkdownRendererService::class);
     $renderedBody = $trans ? $markdownRenderer->render($trans->content) : '';
@@ -21,7 +20,7 @@
     <header class="space-y-6 border-b-3 border-black pb-10">
         <div class="flex items-center gap-3 text-xs font-black text-black">
             <span class="px-3 py-1 bg-[#FFE600] border-2 border-black shadow-[2px_2px_0px_0px_#000] uppercase">
-                {{ $post->category?->translations->first()?->name ?? 'Manifiesto' }}
+                {{ public_translation($post->category)?->name ?? 'Manifiesto' }}
             </span>
             <span>&bull;</span>
             <span>{{ $post->published_at ? $post->published_at->format('d/m/Y') : now()->format('d/m/Y') }}</span>
