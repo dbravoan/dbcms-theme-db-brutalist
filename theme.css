@@ -59,3 +59,23 @@
     border-radius: var(--cms-radius);
     box-shadow: var(--cms-glow, none);
 }
+
+/* Content-region tracks retain this theme's original content width and gutters. */
+@layer components {
+    [data-cms-region-theme="db-brutalist"] {
+        --cms-content-max-width: 80rem;
+        --cms-content-gutter: 1rem;
+    }
+
+    @media (min-width: 40rem) {
+        [data-cms-region-theme="db-brutalist"] {
+            --cms-content-gutter: 1.5rem;
+        }
+    }
+
+    @media (min-width: 64rem) {
+        [data-cms-region-theme="db-brutalist"] {
+            --cms-content-gutter: 2rem;
+        }
+    }
+}

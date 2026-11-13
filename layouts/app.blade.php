@@ -13,7 +13,7 @@
     $__dir = app(\DbCms\Core\Contracts\Services\LocalizationServiceInterface::class)->activeLanguages()
         ->firstWhere("code", app()->getLocale())?->direction ?? "ltr";
 @endphp
-<html lang="{{ $currentLocale }}" dir="{{ $__dir }}" class="h-full front-db-brutalist theme-{{ $adminTheme ?? 'dbcms' }} bg-[#FFFDF8] text-black antialiased">
+<html @if(request()->attributes->get('cms.editorial_preview')) data-cms-preview @endif lang="{{ $currentLocale }}" dir="{{ $__dir }}" class="h-full front-db-brutalist theme-{{ $adminTheme ?? 'dbcms' }} bg-[#FFFDF8] text-black antialiased">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,9 +36,9 @@
     <!--cms-private:end-->
 
     <!-- Main Content -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <x-cms::content-region as="main" theme="db-brutalist" class="flex-grow py-12">
         @yield('content')
-    </main>
+    </x-cms::content-region>
 
     <!-- Footer -->
     @include('theme-db-brutalist::partials.footer')
@@ -65,5 +65,8 @@
     @include('themes::components.scroll-magic')
     @stack('admin_scripts')
     @stack('scripts')
+<!--cms-private:components.cms.overlays:start-->
+@include('components.cms.overlays')
+<!--cms-private:end-->
 </body>
 </html>
